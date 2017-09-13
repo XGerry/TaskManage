@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A0F76C31-DB9F-470E-8ACE-26B36C246ABF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TaskManage.Core</RootNamespace>
+    <AssemblyName>TaskManage.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Common.Logging, Version=3.3.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.3.3.1\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Core, Version=3.3.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.Core.3.3.1\lib\net40\Common.Logging.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Quartz, Version=2.6.0.0, Culture=neutral, PublicKeyToken=f6b8c98a402cc8a4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Quartz.2.6.0\lib\net40\Quartz.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Domain\Activity.cs" />
+    <Compile Include="Domain\ActivityNode.cs" />
+    <Compile Include="Domain\ActivityStatus.cs" />
+    <Compile Include="Domain\JobData.cs" />
+    <Compile Include="Domain\JobDetailsData.cs" />
+    <Compile Include="Domain\JobGroupData.cs" />
+    <Compile Include="Domain\JobType.cs" />
+    <Compile Include="Domain\NamedObject.cs" />
+    <Compile Include="Domain\SchedulerData.cs" />
+    <Compile Include="Domain\SchedulerStatus.cs" />
+    <Compile Include="Domain\TriggerData.cs" />
+    <Compile Include="Domain\TriggerGroupData.cs" />
+    <Compile Include="Domain\TriggerTypes\CronTriggerType.cs" />
+    <Compile Include="Domain\TriggerTypes\SimpleTriggerType.cs" />
+    <Compile Include="Domain\TriggerTypes\TriggerType.cs" />
+    <Compile Include="Exception\SchedulerProviderException.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SchedulerProviders\DefaultSchedulerDataProvider.cs" />
+    <Compile Include="SchedulerProviders\ISchedulerDataProvider.cs" />
+    <Compile Include="SchedulerProviders\ISchedulerProvider.cs" />
+    <Compile Include="SchedulerProviders\RemoteSchedulerProvider.cs" />
+    <Compile Include="SchedulerProviders\StdSchedulerProvider.cs" />
+    <Compile Include="SchedulerProviders\TriggerTypeExtractor.cs" />
+    <Compile Include="Utils\DateTimeOffsetExtensions.cs" />
+    <Compile Include="Utils\Provider.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="job_scheduling_data_2_0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
