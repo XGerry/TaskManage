@@ -7,8 +7,7 @@ using TaskManage.Utils.Log;
 
 namespace TaskManage.Job
 {
-    [DisallowConcurrentExecution]
-    [PersistJobDataAfterExecution]
+    [DisallowConcurrentExecution, PersistJobDataAfterExecution]
     public class TaskJob1 : IJob
     {
         private static readonly ILog _log = LogManager.GetLogger(typeof(TaskJob1));

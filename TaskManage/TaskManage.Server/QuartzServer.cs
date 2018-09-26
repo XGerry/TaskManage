@@ -51,8 +51,8 @@ namespace TaskManage.Server
             properties["quartz.jobStore.dataSource"] = "default";
             properties["quartz.jobStore.tablePrefix"] = "QRTZ_";
             //連接字符串
-            properties["quartz.dataSource.default.connectionString"] = ConfigHelper.GetConnectionString("connStr");
-            properties["quartz.dataSource.default.provider"] = "SqlServer-20";
+            //properties["quartz.dataSource.default.connectionString"] = ConfigHelper.GetConnectionString("connStr");
+            //properties["quartz.dataSource.default.provider"] = "SqlServer-20";
             return properties;
         }
 
