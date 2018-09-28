@@ -1,0 +1,31 @@
+Quartz
+
+一、简介
+Quartz.NET是一个开源的作业调度框架，非常适合在平时的工作中，定时轮询数据库同步，定时邮件通知，定时处理数据等。
+
+二、特点
+1.支持集群，作业分组，作业远程管理。 
+2.自定义精细的时间触发器，使用简单，作业和触发分离。
+3.数据库支持，可以寄宿Windows服务，WebSite，winform等。
+
+三、基础概念
+1.Scheduler：作业调度器。
+2.IJob：作业接口，继承并实现Execute， 编写执行的具体作业逻辑。
+3.JobBuilder：根据设置，生成一个详细作业信息(JobDetail)。
+4.TriggerBuilder：根据规则，生产对应的Trigger。
+5.Trigger：任务触发器，用于定义使用何种方式出发任务(job)，同一个job可以定义多个trigger ，多个trigger 各自独立的执行调度，每个trigger 中必须且只能定义一种触发器类型(calendar-interval、simple、cron)。
+6.Job 有名称和所属的组别，scheduler可以通过组别和名称来找到唯一的一个job。Trigger 是job被调度的机制，许多Trigger可以指向同一个Job，但一个Trigger仅仅能执行一个Job
+7.一个scheduler维护一个JobDetail和一个或者多个Trigger的注册。一旦注册，scheduler负责在job关联的Trigger触发时(当调度到达时间)执行该job。
+Scheduler实例有SchedulerFactory创建产生。一个已经创建或者初始化的scheduler可以被创建它的工厂查询和使用。
+在一个scheduler被创建后，它处于”STAND-BY”模式，在触发任何job前需要使用它的start()方法来启动。
+客户端程序通过定义一个实现了job接口的类来创建Job，JobDetail对象同时对创建(客户端)来定义一个单独的job实例。
+JobDetail实例然后通过ScheduleJob(JobDetail，Trigger)或者addJob(JobDetail,boolean)方法注册到Scheduler。
+Trigger定义用来触发基于给定Scheduler的单独的job实例，SimpleTrigger对触发一次或精确时间的触发、在给定延迟后重复触发的应用中非常有用。
+Contrigger允许基于一天中的具体时间、一周中的一天、一月中的一天、一年中的一个月的调度。
+Job和trigger都具有名称和关联的组别，这是它们在一个单独Scheduler的唯一身份识别码。
+组别的这个特征在创建逻辑组或对job和Trigger进行归类时非常有用。如果你不想对给定的job和trigger指定一个分组，可以使用默认组常量，这个常量已经在接口中定义好了。
+四、实现动态添加Job的几种方式
+1.传统方式：继承IJob，实现Execute方法，业务逻辑包含在里面。
+2.框架发射：自己写接口实现，编译成DLL上传到作业执行节点，在执行节点中反射得到Job信息。 
+3.进程方式：与Windows服务类似。使用方编写自己的job，无需实现任何接口，将程序发送到执行节点，由执行节点起进程调用job程序。
+4.框架配置方式：使用方直接使用quartz.net框架，实现自己的job。从管理方拉取执行节点配置，然后自行管理执行节点。
